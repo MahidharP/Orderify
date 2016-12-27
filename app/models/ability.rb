@@ -5,12 +5,14 @@ class Ability
 
     if user.nil?
         can :index, :store
+        can :read, [Category, SubCategory, Product]
     elsif user.role? "admin"
-        can :manage, :all 
+        can :manage, :all
     elsif user.role? "user"
         can :read, Product
         can :manage, LineItem
         can [:create, :read], Order
+        can :read, [Category, SubCategory, Product]
     end
 
     # Define abilities for the passed in user here. For example:
